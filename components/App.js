@@ -61,27 +61,28 @@ App = React.createClass({
 		);
 	};
 
-	function xhrPromise(url) {
-		return new Promise(
-			function(resolve, reject) {
-				const xhr = new XMLHttpRequest();
-				xhr.onload = function() {
-					if (this.status === 200) {
-						resolve(this.response);
-					} else {
-						reject(new Error(this.statusText));
-					}
-				};
-				xhr.onerror = function() {
-					reject(new Error(
-						`XMLHttpRequest Error: ${this.statusText}`));
-				};
-				xhr.open('GET', url);
-				xhr.send();
+function xhrPromise(url) {
+	return new Promise(
+		function(resolve, reject) {
+			const xhr = new XMLHttpRequest();
+			xhr.onload = function() {
+				if (this.status === 200) {
+					resolve(this.response);
+				} else {
+					reject(new Error(this.statusText));
+				}
 			};
-		)
-	};
-	xhrPromise('http://api.giphy.com/v1/gifs/random?api_key=SxRx4DudYvAGGZeaKeJBRex2DhO88xmD&tag=Example')
-	.then(response => console.log('Wynik wyszukiwania: ' + response))
-	.catch(error => console.error('Coś poszło nie tak', error));
+			xhr.onerror = function() {
+				reject(new Error(
+					`XMLHttpRequest Error: ${this.statusText}`));
+			};
+			xhr.open('GET', url);
+			xhr.send();
+		};
+	)
+};
+xhrPromise('http://api.giphy.com/v1/gifs/random?api_key=SxRx4DudYvAGGZeaKeJBRex2DhO88xmD&tag=Example')
+.then(response => console.log('Wynik wyszukiwania: ' + response))
+.catch(error => console.error('Coś poszło nie tak', error));
+
 });
