@@ -15,9 +15,9 @@ Gif = React.createClass({
 		return (
 			<div style={styles}>
 				<a href={this.getUrl()} title='view this on giphy' target='new'>
-					<img id='gif' src={url} style={{width: '100%', masWidth: '350px'}}/>
+					<img id='gif' src={url} style={{width: '100%', maxWidth: '350px'}}/>
 				</a>
 			</div>
 		);
-	};
+	}
 });
