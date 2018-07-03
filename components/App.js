@@ -15,7 +15,13 @@ App = React.createClass({
 		this.setState({
 			loading: true
 		});
-		this.getGif(searchingText).then(response => console.log('Wynik wyszukiwania: ' + response));
+		this.getGif(searchingText).then( (response) => {
+			this.setState({
+				loading: false,
+				gif: response.data
+			});
+			console.log(response.data);
+		});
 	},
 
 	getGif: function(searchingText) {
@@ -25,7 +31,7 @@ App = React.createClass({
 				const xhr = new XMLHttpRequest();
 				xhr.onload = function() {
 					if (this.status === 200) {
-						resolve(this.response);
+						resolve(JSON.parse(this.response));
 					} else {
 						reject(new Error(this.statusText));
 					}
@@ -56,7 +62,7 @@ App = React.createClass({
 				<Gif
 					loading={this.state.loading}
 					url={this.state.gif.url}
-					sourceUrl={this.state.gif.sourceUrl}
+					sourceUrl={this.state.gif.source_post_url}
 				/>
 			</div>
 		)

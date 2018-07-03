@@ -15,11 +15,15 @@ App = React.createClass({
 
 
 	handleSearch: function handleSearch(searchingText) {
-		this.seState({
+		this.setState({
 			loading: true
 		});
-		this.getGif(searchingText).then(function (response) {
-			return console.log('Wynik wyszukiwania: ' + response);
+		this.getGif(searchingText).then( (response) => {
+			this.setState({
+				loading: false,
+				gif: response
+			})
+			return console.log('Wynik wyszukiwania: ' + response.url);
 		});
 	},
 
